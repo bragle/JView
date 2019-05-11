@@ -6,11 +6,33 @@ class JView {
 		this._dom.container = container;
 		this._dom.container.classList.add("jv");
 
-		if (build !== false) {
+		if (build === false) {
 
-			this.build(JSON.parse(this._dom.container.textContent.trim()), null, 1);
+			return;
 
 		}
+
+		const nodeContent = this._dom.container.textContent.trim();
+
+		if (!nodeContent){
+
+			return;
+
+		}
+
+		let json;
+
+		try {
+
+			json = JSON.parse(nodeContent);
+
+		}catch(e){
+
+			return;
+
+		}
+
+		this.build(json, null, 1);
 
 	}
 
